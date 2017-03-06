@@ -3,6 +3,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 var db = mongoose.connect('mongodb://localhost/bookAPI');
+mongoose.Promise = global.Promise;
 
 var app = express();
 
