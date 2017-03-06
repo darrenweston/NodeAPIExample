@@ -23,7 +23,15 @@ var bookController = function (Book) {
                 res.status(500); // 500: Internal Server Error 
                 res.send(err);
             } else {
-                res.json(books);
+                var returnBooks = [];
+                books.forEach(function(element) {
+                    var newBook = element.toJSON(); // copies
+                    newBook.links = {};
+                    newBook.links.self = 'http://' + req.headers.host +
+                        '/api/books/' + newBook._id;
+                    returnBooks.push(newBook);
+                });
+                res.json(returnBooks);
             }
         });
     };
